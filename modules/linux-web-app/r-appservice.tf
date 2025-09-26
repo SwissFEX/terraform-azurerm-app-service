@@ -273,6 +273,8 @@ resource "azurerm_linux_web_app" "main" {
     }
   }
 
+  key_vault_reference_identity_id = var.identity != null && length(var.identity.identity_ids) > 0 ? var.identity.identity_ids[0] : null
+
   dynamic "backup" {
     for_each = var.backup_enabled ? ["backup"] : []
     content {

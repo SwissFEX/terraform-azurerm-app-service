@@ -266,6 +266,8 @@ resource "azurerm_linux_web_app_slot" "main" {
     }
   }
 
+  key_vault_reference_identity_id = var.identity != null && length(var.identity.identity_ids) > 0 ? var.identity.identity_ids[0] : null
+
   dynamic "storage_account" {
     for_each = var.mount_points
     iterator = mp
